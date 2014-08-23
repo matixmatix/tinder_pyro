@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require File.expand_path("../lib/pyro/version", __FILE__)
 
 Gem::Specification.new do |spec|
   spec.name = 'tinder_pyro'
@@ -12,11 +11,11 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://github.com/nneal/pyro'
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 1.9.3'
-
-  spec.files = `git ls-files`.split($/)
-  spec.executables = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = ['lib']
+  
+  spec.files         = `git ls-files`.split("\n")
+  spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  spec.executables   = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
+  spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency 'httparty', '~> 0.3'
   spec.add_runtime_dependency 'json', '~> 1.6'

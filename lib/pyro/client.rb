@@ -45,5 +45,10 @@ module TinderPyro
     def update_location(latitude, longitude)
       @requestor.post_request("user/ping", lat: latitude, lon: longitude)
     end
+
+    # Tinder Pro
+    def update_passport_location(latitude, longitude)
+      @requestor.post_request("passport/user/travel", { lat: latitude.to_f, lon: longitude.to_f })
+    end
   end
 end
